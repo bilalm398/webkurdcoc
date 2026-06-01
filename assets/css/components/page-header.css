@@ -1,0 +1,64 @@
+.page-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.page-header.reveal {
+    margin-bottom: var(--space-8);
+}
+
+.page-header__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+}
+
+.page-header__title--accent-orange {
+    color: var(--color-accent-orange);
+}
+
+.page-header__title--accent-red {
+    color: var(--color-accent-red);
+}
+
+.page-header__title--accent-spring {
+    color:  #fdc750;
+}
+
+
+
+.page-header__logo--large {
+    height: clamp(2.25rem, 8vw, 3rem);
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    margin-bottom: var(--space-4);
+}
+
+.page-header__subtitle {
+    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+    color: var(--color-text-muted);
+    max-width: 42rem;
+    margin: 0 auto;
+    line-height: 1.65;
+    text-wrap: pretty;
+}
+
+.page-tool--attack .page-header__title--accent-red {
+    color: #dc8f62;
+}
+
+.page-tool--trending .page-header__title--accent-orange {
+    color: #fb923c;
+}
+
+.page-tool--armies .page-header__title--accent-red {
+    color: #2e92ab;
+}
+
+.page-tool--base .page-header__title--accent-spring {
+    color: #facc15;
+}

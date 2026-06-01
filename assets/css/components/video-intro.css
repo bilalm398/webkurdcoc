@@ -1,0 +1,201 @@
+/**
+ * Video Intro Component Styles
+ * Features a centered glassmorphic cinematic floating card container,
+ * glowing gold outline, gold-tinted video filter, soft vignettes,
+ * and a premium integrated skip button.
+ */
+
+/* Scroll lock when intro is playing */
+body.intro-scroll-lock {
+    overflow: hidden !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+}
+
+/* Fullscreen Overlay Wrapper (Extremely transparent to show home page) */
+.video-intro {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: rgba(5, 11, 9, 0.15); /* Soft transparent mask */
+    backdrop-filter: blur(4px) saturate(1.15); /* Soft background blur to let homepage pop */
+    -webkit-backdrop-filter: blur(4px) saturate(1.15);
+    z-index: 99999; /* Higher than header and toast to cover everything */
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), 
+                visibility 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Fading out transition state */
+.video-intro--fading-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Container wrapper to scale card slightly on exit for a zoom-away effect */
+.video-intro__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.video-intro--fading-out .video-intro__wrapper {
+    transform: scale(0.94) translateY(10px); /* Card slides down and zooms away gently */
+}
+
+/* Premium Floating Glass Card */
+.video-intro__card {
+    position: relative;
+    width: 92%;
+    max-width: 600px; /* Cinematic size in center of viewport */
+    aspect-ratio: 16 / 9; /* Perfect screen ratio */
+    background: rgba(15, 40, 32, 0.7); /* Rich translucent green glass */
+    border: 2px solid rgba(212, 175, 55, 0.45); /* Elegant gold metallic outline */
+    border-radius: var(--radius-xl); /* High-end rounded corners */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 
+                0 0 35px rgba(212, 175, 55, 0.22); /* Glowing gold outer shine */
+    overflow: hidden;
+    backdrop-filter: blur(16px); /* Frosted glass depth inside the card */
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 5;
+    animation: scale-up-card 0.65s var(--ease-spring) both;
+}
+
+/* Autoplaying WebM video player (sized to card) */
+.video-intro__player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    /* CSS Filter combination to turn video into rich gold */
+    filter: grayscale(100%) sepia(100%) saturate(320%) hue-rotate(5deg) brightness(85%) contrast(125%);
+    mix-blend-mode: screen; /* Removes black background of the video to float on green glass */
+    z-index: 1;
+}
+
+/* Gold mix-blend-mode tint overlay */
+.video-intro__tint {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.26) 0%, rgba(15, 31, 28, 0.35) 100%),
+                linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(180, 83, 9, 0.15) 100%);
+    mix-blend-mode: color;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Cinematic Vignette Overlay (inside card borders) */
+.video-intro__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, rgba(5, 11, 9, 0.5) 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Integrated Card-Level Glassmorphic Skip Button (RTL Layout Friendly) */
+.video-intro__skip-btn {
+    position: absolute;
+    bottom: var(--space-3);
+    left: var(--space-3);
+    z-index: 10; /* Above vignettes */
+    background: rgba(15, 31, 28, 0.6);
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    backdrop-filter: blur(8px) saturate(1.2);
+    -webkit-backdrop-filter: blur(8px) saturate(1.2);
+    color: var(--color-accent-amber);
+    padding: 0.45rem 1.15rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform var(--transition-fast), 
+                background var(--transition-fast), 
+                border-color var(--transition-fast), 
+                box-shadow var(--transition-fast);
+    direction: ltr; /* Keeps icon/text layout coherent */
+}
+
+/* Kurdish language reads right-to-left, but we show skip label then arrow pointing left */
+.video-intro__skip-btn span {
+    order: 2;
+    font-family: var(--font-body);
+}
+
+.video-intro__skip-btn svg {
+    order: 1;
+    width: 12px;
+    height: 12px;
+    transition: transform var(--transition-fast);
+    transform: rotate(180deg); /* Points left for skip in RTL layout */
+}
+
+/* Hover effects */
+.video-intro__skip-btn:hover {
+    transform: translateY(-1.5px);
+    background: rgba(212, 175, 55, 0.2);
+    border-color: #facc15;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.video-intro__skip-btn:active {
+    transform: translateY(0);
+}
+
+.video-intro__skip-btn:hover svg {
+    transform: rotate(180deg) translateX(3px); /* Interactive slide animation */
+}
+
+/* Enter card spring animation */
+@keyframes scale-up-card {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Accessibility reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .video-intro {
+        transition: none;
+    }
+    .video-intro__wrapper {
+        transition: none;
+    }
+    .video-intro--fading-out .video-intro__wrapper {
+        transform: none;
+    }
+    .video-intro__card {
+        animation: none !important;
+        transform: none !important;
+    }
+    .video-intro__skip-btn svg {
+        transition: none;
+    }
+    .video-intro__skip-btn:hover svg {
+        transform: rotate(180deg);
+    }
+}

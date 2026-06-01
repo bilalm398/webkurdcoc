@@ -1,0 +1,376 @@
+body.page-tool {
+    background: radial-gradient(ellipse at 30% 0%, rgba(45, 212, 191, 0.12) 0%, transparent 50%),
+        var(--gradient-page);
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+body.page-tool--attack {
+    background: radial-gradient(ellipse at 70% 0%, rgba(175, 95, 48, 0.15) 0%, transparent 50%),
+        var(--gradient-page);
+}
+
+.tool-steps {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.tool-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    transition: color var(--transition-fast), border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.tool-step__num {
+    width: 1.375rem;
+    height: 1.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.6875rem;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.tool-step.is-active {
+    color: var(--color-primary-light);
+    border-color: var(--color-border-strong);
+    background: rgba(45, 212, 191, 0.1);
+}
+
+.tool-step.is-active .tool-step__num {
+    background: linear-gradient(135deg, #e59a06, #fdc750);
+    color: #102f04;
+}
+
+.tool-step.is-done {
+    color: var(--color-success);
+}
+
+.tool-card {
+    background: var(--color-bg-card);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--color-border);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-lg);
+    transition: box-shadow var(--transition-base);
+    position: relative; /* Supports absolute centering of the loading state mask */
+}
+
+.tool-card:focus-within {
+    box-shadow: var(--shadow-lg), var(--shadow-glow-primary);
+}
+
+.upload-zone {
+    border: 2px dashed #fdc750;
+    border-radius: var(--radius-xl);
+    padding: clamp(2rem, 6vw, 3rem) var(--space-4);
+    text-align: center;
+    background: rgba(45, 212, 191, 0.04);
+    transition: border-color var(--transition-base), background var(--transition-base),
+        transform var(--transition-base), box-shadow var(--transition-base);
+    cursor: pointer;
+    margin-bottom: var(--space-5);
+    position: relative;
+}
+
+.upload-zone--attack {
+    border-color: rgba(175, 95, 48, 0.5);
+    background: rgba(175, 95, 48, 0.04);
+}
+
+.upload-zone:hover {
+    border-color: var(--color-primary-light);
+    background: rgba(45, 212, 191, 0.08);
+}
+
+.upload-zone--attack:hover {
+    border-color: #e88d59;
+    background: rgba(175, 95, 48, 0.08);
+}
+
+.upload-zone.is-dragover {
+    border-color: var(--color-accent-amber);
+    background: rgba(250, 204, 21, 0.08);
+    transform: scale(1.01);
+    box-shadow: var(--shadow-glow-primary);
+    animation: pulse-ring 1.5s ease-out infinite;
+}
+
+.upload-zone.is-hidden {
+    display: none;
+}
+
+.upload-zone__input {
+    display: none;
+}
+
+.upload-zone__icon-wrap {
+    width: clamp(3.5rem, 12vw, 4.5rem);
+    height: clamp(3.5rem, 12vw, 4.5rem);
+    margin: 0 auto var(--space-4);
+    background: linear-gradient(135deg, #e59a06, #fdc750);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-glow-primary);
+    transition: transform var(--transition-base);
+}
+
+.upload-zone:hover .upload-zone__icon-wrap {
+    transform: scale(1.05);
+    animation: float-soft 2s ease-in-out infinite;
+}
+
+.upload-zone--attack .upload-zone__icon-wrap {
+    background: linear-gradient(135deg, #af5f30, #e88d59);
+    box-shadow: 0 0 18px rgba(175, 95, 48, 0.35);
+}
+
+.upload-zone__icon {
+    width: 45%;
+    height: 45%;
+    color: #042f2e;
+}
+
+.upload-zone--attack .upload-zone__icon {
+    color: #fff;
+}
+
+.upload-zone__label {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+}
+
+.upload-zone__hint {
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+}
+
+.preview-panel {
+    display: none;
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    animation: scale-in 0.35s var(--ease-out);
+}
+
+.preview-panel.is-active {
+    display: block;
+}
+
+.preview-panel__image {
+    max-width: 100%;
+    max-height: min(300px, 50vh);
+    border-radius: var(--radius-md);
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.preview-panel__filename {
+    text-align: center;
+    margin-top: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    word-break: break-all;
+}
+
+.preview-panel__remove {
+    display: block;
+    margin: var(--space-4) auto 0;
+}
+
+.loading-state {
+    display: none;
+    text-align: center;
+    padding: var(--space-6);
+}
+
+.loading-state.is-active {
+    display: flex !important; /* Force flexbox layout to center video loader and text */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0; /* Fully overlays the tool card for easy focus and interaction lock */
+    background: rgba(15, 31, 28, 0.72); /* Glassmorphic dark overlay mask */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-2xl); /* Match container border-radius perfectly */
+    z-index: 100;
+    padding: var(--space-6);
+    animation: fade-in 0.35s var(--ease-out);
+}
+
+.loading-state__text {
+    color: #facc15 !important;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-top: var(--space-4);
+    letter-spacing: 0.5px;
+    animation: text-pulse-load 1.6s ease-in-out infinite;
+}
+
+/* Premium Rounded Rectangle Gold Video Loader Loop */
+.loading-state__video-wrap {
+    width: 14rem; /* Size expanded for improved focus and cinematic look */
+    aspect-ratio: 16 / 9; /* Clean 16:9 aspect ratio matching main intro card */
+    margin: 0 auto var(--space-4);
+    border-radius: var(--radius-xl); /* Balanced rounded corners */
+    border: 3.5px solid rgba(250, 204, 21, 0.5);
+    background: rgba(15, 40, 32, 0.7);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(250, 204, 21, 0.3), inset 0 0 15px rgba(250, 204, 21, 0.15);
+    position: relative;
+    overflow: hidden;
+    animation: pulse-border 2s ease-in-out infinite;
+}
+
+.loading-state__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) sepia(100%) saturate(300%) hue-rotate(5deg) brightness(85%) contrast(125%);
+    mix-blend-mode: screen; /* Strips black color inside the WebM to float on card theme */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.loading-state__video-tint {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(15, 31, 28, 0.4) 100%);
+    mix-blend-mode: color;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes pulse-border {
+    0%, 100% {
+        border-color: rgba(250, 204, 21, 0.45);
+        box-shadow: 0 0 20px rgba(250, 204, 21, 0.3), inset 0 0 12px rgba(250, 204, 21, 0.15);
+    }
+    50% {
+        border-color: rgba(250, 204, 21, 0.8);
+        box-shadow: 0 0 30px rgba(250, 204, 21, 0.55), inset 0 0 18px rgba(250, 204, 21, 0.25);
+    }
+}
+
+@keyframes text-pulse-load {
+    0%, 100% { opacity: 0.68; transform: scale(0.98); }
+    50% { opacity: 1; transform: scale(1.02); }
+}
+
+.results-panel {
+    margin-top: var(--space-5);
+}
+
+.results-panel:not(:empty) {
+    animation: fade-in-up 0.45s var(--ease-out);
+}
+
+@media (max-width: 768px) {
+    .tool-card {
+        padding: var(--space-4);
+        border-radius: var(--radius-xl);
+    }
+
+    .tool-steps {
+        gap: var(--space-2);
+    }
+
+    .tool-step {
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .tool-step span:not(.tool-step__num) {
+        display: none;
+    }
+
+    /* Display the active step's text label on mobile to keep context clear */
+    .tool-step.is-active span:not(.tool-step__num) {
+        display: inline;
+    }
+}
+
+@media (min-width: 769px) {
+    .tool-step span:not(.tool-step__num) {
+        display: inline;
+    }
+}
+
+/* Page specific overrides for Attack Finder (Orange theme) */
+body.page-tool--attack .tool-step.is-active {
+    color: #e88d59;
+    border-color: rgba(175, 95, 48, 0.4);
+    background: rgba(175, 95, 48, 0.08);
+}
+
+body.page-tool--attack .tool-step.is-active .tool-step__num {
+    background: linear-gradient(135deg, #af5f30, #e88d59);
+    color: #ffffff;
+}
+
+/* Override disabled here to maintain gorgeous gold load across both tools */
+body.page-tool--attack .loading-state__text {
+    color: #facc15;
+}
+
+/* Page specific overrides for Base Search (Yellow theme) */
+body.page-tool--base {
+    background: radial-gradient(ellipse at 30% 0%, rgba(250, 204, 21, 0.15) 0%, transparent 50%),
+        var(--gradient-page);
+}
+
+body.page-tool--base .tool-step.is-active {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.4);
+    background: rgba(250, 204, 21, 0.08);
+}
+
+body.page-tool--base .tool-step.is-active .tool-step__num {
+    background: linear-gradient(135deg, #ca8a04, #facc15);
+    color: var(--color-bg);
+}
+
+body.page-tool--base .upload-zone {
+    border-color: rgba(250, 204, 21, 0.5);
+    background: rgba(250, 204, 21, 0.04);
+}
+
+body.page-tool--base .upload-zone:hover {
+    border-color: #facc15;
+    background: rgba(250, 204, 21, 0.08);
+}
+
+body.page-tool--base .upload-zone__icon-wrap {
+    background: linear-gradient(135deg, #ca8a04, #facc15);
+    box-shadow: 0 0 22px rgba(250, 204, 21, 0.35);
+}
+
+body.page-tool--base .loading-state__text {
+    color: #facc15;
+}
+
+body.page-tool--base .upload-zone__icon {
+    color: #ffffff;
+}

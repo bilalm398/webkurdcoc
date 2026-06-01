@@ -1,0 +1,93 @@
+.app-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-2) 0;
+    mask-image: linear-gradient(to left, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+}
+
+.app-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.app-nav__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--touch-min);
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    border: 1px solid transparent;
+    transition: color var(--transition-fast), background var(--transition-fast),
+        border-color var(--transition-fast), transform var(--transition-fast);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.app-nav__link:hover {
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.app-nav__link.is-active {
+    color: #042f2e;
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: var(--shadow-glow-primary);
+}
+
+/* Page-specific active navigation gradients to match page themes */
+.page-tool--base .app-nav__link.is-active {
+    background: linear-gradient(135deg, #ca8a04, #facc15);
+    color: var(--color-bg);
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
+}
+
+.page-tool--attack .app-nav__link.is-active {
+    background: linear-gradient(135deg, #af5f30, #e88d59);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(232, 141, 89, 0.4);
+}
+
+.page-tool--trending .app-nav__link.is-active {
+    background: linear-gradient(135deg, #ea580c, #fb923c);
+    color: #4c1d05;
+    box-shadow: 0 0 15px rgba(234, 88, 12, 0.4);
+}
+
+.page-tool--armies .app-nav__link.is-active {
+    background: linear-gradient(135deg, #2e92ab, #4bc3df);
+    color: #04242e;
+    box-shadow: 0 0 15px rgba(46, 146, 171, 0.4);
+}
+
+.page-tool--bases .app-nav__link.is-active {
+    background: linear-gradient(135deg, #059669, #4ade80);
+    color: #042f2e;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+}
+
+.app-nav__link:focus-visible {
+    outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+    .app-nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow: visible;
+        mask-image: none;
+    }
+
+    .app-nav__link {
+        font-size: 0.875rem;
+    }
+}

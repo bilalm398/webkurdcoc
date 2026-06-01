@@ -1,0 +1,229 @@
+.trending-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.trending-tabs {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-1);
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+}
+
+.trending-tab {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: var(--touch-min);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast), background var(--transition-fast),
+        box-shadow var(--transition-fast), transform var(--transition-fast);
+    cursor: pointer;
+}
+
+.trending-tab svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+}
+
+.trending-tab:hover:not(.is-active) {
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.trending-tab.is-active {
+    background: var(--gradient-primary);
+    color: #042f2e;
+    box-shadow: var(--shadow-glow-primary);
+}
+
+.trending-tab[aria-selected="true"] {
+    background: var(--gradient-primary);
+    color: #042f2e;
+}
+
+.trending-panels {
+    position: relative;
+    min-height: 200px;
+}
+
+.trending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-5);
+}
+
+.trending-grid.is-hidden {
+    display: none;
+}
+
+.trending-card {
+    background: var(--color-bg-card);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), border-color var(--transition-base),
+        box-shadow var(--transition-base);
+}
+
+.trending-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-glow-primary);
+}
+
+.trending-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--gradient-card-media);
+}
+
+.trending-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease-out);
+}
+
+.trending-card:hover .trending-card__image {
+    transform: scale(1.04);
+}
+
+.trending-card__rank {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    width: 2.25rem;
+    height: 2.25rem;
+    background: var(--gradient-sun);
+    color: #422006;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35);
+    z-index: 2;
+}
+
+.trending-card__badge {
+    position: absolute;
+    top: var(--space-3);
+    left: 3.25rem;
+    padding: 0.2rem 0.5rem;
+    background: rgba(251, 146, 60, 0.95);
+    color: #431407;
+    border-radius: var(--radius-sm);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    z-index: 2;
+}
+
+.trending-card__badge--attack {
+    background: rgba(45, 212, 191, 0.95);
+    color: #042f2e;
+}
+
+.trending-card__body {
+    padding: var(--space-4);
+}
+
+.trending-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.trending-card__type {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+}
+
+.trending-card__match {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.trending-card__actions .btn {
+    width: 100%;
+}
+
+.trending-grid__status {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: var(--space-10) var(--space-4);
+}
+
+@media (max-width: 480px) {
+    .trending-tab {
+        padding: var(--space-2) var(--space-2);
+        font-size: 0.8125rem;
+    }
+}
+
+/* Page-specific overrides for Trending page (Orange theme) */
+body.page-tool--trending {
+    background: radial-gradient(ellipse at 50% 0%, rgba(251, 146, 60, 0.08) 0%, transparent 50%),
+        var(--gradient-page);
+}
+
+.page-tool--trending .trending-tab.is-active,
+.page-tool--trending .trending-tab[aria-selected="true"] {
+    background: linear-gradient(135deg, #ea580c, #fb923c);
+    color: #4c1d05;
+    box-shadow: 0 0 15px rgba(234, 88, 12, 0.4);
+}
+
+.page-tool--trending .trending-tab:hover:not(.is-active) {
+    color: #fb923c;
+    background: rgba(251, 146, 60, 0.08);
+}
+
+.page-tool--trending .trending-card:hover {
+    border-color: rgba(251, 146, 60, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28), 0 0 20px rgba(251, 146, 60, 0.25);
+}
+
+.page-tool--trending .trending-card__match {
+    color: #fb923c;
+}
+
+.page-tool--trending .btn--primary {
+    background: linear-gradient(135deg, #ea580c, #fb923c);
+    color: #4c1d05;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+}
+
+.page-tool--trending .btn--primary:hover {
+    background: linear-gradient(135deg, #fb923c, #fdba74);
+    transform: translateY(-1px);
+}

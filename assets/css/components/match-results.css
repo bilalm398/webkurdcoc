@@ -1,0 +1,108 @@
+.match-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.match-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    transition: border-color var(--transition-fast), background var(--transition-fast),
+        transform var(--transition-fast);
+    animation: fade-in-up 0.4s var(--ease-out) both;
+}
+
+.match-list .match-card:nth-child(1) { animation-delay: 0.05s; }
+.match-list .match-card:nth-child(2) { animation-delay: 0.1s; }
+.match-list .match-card:nth-child(3) { animation-delay: 0.15s; }
+.match-list .match-card:nth-child(n+4) { animation-delay: 0.2s; }
+
+.match-card:hover {
+    border-color: var(--color-border-strong);
+    background: rgba(45, 212, 191, 0.06);
+    transform: translateX(-4px);
+}
+
+.match-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    margin-bottom: var(--space-4);
+}
+
+.match-card__stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+}
+
+.match-card__stat strong {
+    color: var(--color-primary-light);
+    font-weight: 700;
+}
+
+.match-card__stat-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--color-accent-amber);
+    flex-shrink: 0;
+}
+
+.match-card__troops {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+    line-height: 1.5;
+}
+
+.match-card__troops strong {
+    color: var(--color-text);
+}
+
+.match-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.match-card__actions .btn {
+    flex: 1;
+    min-width: min(100%, 140px);
+}
+
+.match-card__youtuber {
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+    margin-top: var(--space-3);
+}
+
+.empty-state,
+.error-state {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    color: var(--color-text-muted);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--color-border);
+    animation: fade-in 0.4s var(--ease-out);
+}
+
+.error-state {
+    color: var(--color-danger);
+    border-color: rgba(248, 113, 113, 0.35);
+    background: rgba(248, 113, 113, 0.08);
+}
+
+@media (max-width: 480px) {
+    .match-card__actions {
+        flex-direction: column;
+    }
+
+    .match-card__actions .btn {
+        width: 100%;
+    }
+}
